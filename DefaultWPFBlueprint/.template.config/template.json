@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/template",
+  "author": "Tom Jegge",
+  "name": "WPF Application for competition",
+  "description": "A project for creating a command-line application that can run on .NET on Windows, Linux and macOS, and has an async Main method.",
+  "identity": "Tom.CompetitionWpf.1.0",
+  "shortName": "competitionWpf",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "DefaultWPFBlueprint",
+  "symbols": {
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "net9.0"
+        }
+      ],
+      "defaultValue": "net9.0"
+    }
+  }
+}
