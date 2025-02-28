@@ -22,5 +22,17 @@
       ],
       "defaultValue": "net9.0"
     }
-  }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            ".git",
+            ".github"
+          ]
+        }
+      ]
+    }
+  ]
 }
