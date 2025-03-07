@@ -8,7 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox x:Name="TxtUsername" Width="200" Text="Benutzername"/>
+            <TextBox x:Name="TxtUsername" Width="200"/>
             <PasswordBox x:Name="TxtPassword" Width="200" Margin="0,10,0,10"/>
             <Button Content="Login" Width="100" Click="Login_Click" Margin="0,0,0,5"/>
             <Button Content="Registrieren" Width="100" Click="OpenRegister"/>
