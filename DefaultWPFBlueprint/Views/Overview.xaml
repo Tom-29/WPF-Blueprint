@@ -27,7 +27,8 @@
                     <DataGridTextColumn Header="Preis" Binding="{Binding Price, StringFormat=C}" Width="Auto"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Content="Produkt bearbeiten" Command="{Binding OpenEditFormCommand}" />
+            <Button Content="Produkt bearbeiten" Command="{Binding OpenEditFormCommand}"
+                    IsEnabled="{Binding SelectedItem, Converter={StaticResource NullToBoolConverter}}"/>
         </StackPanel>
     </Grid>
 </UserControl>
