@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{664544
 		.github\workflows\build.yml = .github\workflows\build.yml
 		.gitignore = .gitignore
 		readme.md = readme.md
+		DefaultWPFBlueprint\.template.config\template.json = DefaultWPFBlueprint\.template.config\template.json
 	EndProjectSection
 EndProject
 Global
