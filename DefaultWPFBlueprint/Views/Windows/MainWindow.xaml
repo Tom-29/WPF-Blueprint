@@ -4,17 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DefaultWPFBlueprint"
-        mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ContentControl x:Name="MainContent" Grid.Row="0" Margin="10" />
+        <Label Grid.Row="0" x:Name="UserLabel" FontSize="16"/>
+        
+        <ContentControl x:Name="MainContent" Grid.Row="1" Margin="10" />
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10">
             <Button Content="Page 1" Click="NavigateToMainPage" Margin="5"/>
             <Button Content="Page 2" Click="NavigateToProductPage" Margin="5"/>
         </StackPanel>

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DefaultWPFBlueprint.Views.Main"
+﻿<UserControl x:Class="DefaultWPFBlueprint.Views.Overview"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,16 +13,21 @@
                 <TextBlock Text="{Binding TotalCount, StringFormat='Total items: {0}'}" />
                 <TextBlock Text="{Binding TotalWorth, StringFormat='Wert insgesamt: {0:C}'}" />
             </ListBox>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Height="200">
-                <DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Produktname" Binding="{Binding Name}" />
-                        <DataGridTextColumn Header="Bestand" Binding="{Binding Quantity}" />
-                        <DataGridTextColumn Header="Preis" Binding="{Binding Price, StringFormat=C}" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </ScrollViewer>
-            <Button Click="AddEntity">Add item</Button>
+            <DataGrid ItemsSource="{Binding Items}" 
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                      AutoGenerateColumns="False" 
+                      IsReadOnly="False"
+                      MaxHeight="180"
+                      Margin="0 0 0 10"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Produktname" Binding="{Binding Name}" Width="*" />
+                    <DataGridTextColumn Header="Bestand" Binding="{Binding Quantity}" Width="Auto"/>
+                    <DataGridTextColumn Header="Preis" Binding="{Binding Price, StringFormat=C}" Width="Auto"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="Produkt bearbeiten" Command="{Binding OpenEditFormCommand}" />
         </StackPanel>
     </Grid>
 </UserControl>

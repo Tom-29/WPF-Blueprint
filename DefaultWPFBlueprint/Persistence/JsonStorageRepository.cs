@@ -1,8 +1,7 @@
 ﻿using System.IO;
 using System.Text.Json;
-using DefaultWPFBlueprint.Models;
 
-namespace DefaultWPFBlueprint;
+namespace DefaultWPFBlueprint.Persistence;
 
 public static class JsonStorageRepository
 {

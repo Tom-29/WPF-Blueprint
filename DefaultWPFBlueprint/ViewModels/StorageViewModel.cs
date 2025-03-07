@@ -1,13 +1,19 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using DefaultWPFBlueprint.Models;
+using DefaultWPFBlueprint.Persistence;
+using DefaultWPFBlueprint.Services;
+using DefaultWPFBlueprint.Views;
 
 namespace DefaultWPFBlueprint.ViewModels;
 
 public sealed partial class StorageViewModel : ObservableObject
 {
     [ObservableProperty] private ObservableCollection<Item> _items;
+    
+    [ObservableProperty] private Item? _selectedItem;
 
     [ObservableProperty] private double _totalWorth;
     
@@ -15,7 +21,8 @@ public sealed partial class StorageViewModel : ObservableObject
 
     public StorageViewModel()
     {
-        Items = new ObservableCollection<Item>(JsonStorageRepository.LoadItems().Items);
+        using AppDbContext db = new AppDbContext();
+        Items = new ObservableCollection<Item>(db.Items.ToList());
         Items.CollectionChanged += OnItemsCollectionChanged;
 
         UpdatePriceAndCount();
@@ -41,11 +48,31 @@ public sealed partial class StorageViewModel : ObservableObject
         TotalCount = totalCount;
     }
 
-    private void UpdateFile()
+    [RelayCommand]
+    private void AddItem()
     {
-        JsonDataTemplate template = JsonStorageRepository.LoadItems();
-        template.Items = Items;
-        JsonStorageRepository.SaveItems(template);
+        using AppDbContext db = new AppDbContext();
+    
+        var newItem = new Item
+        {
+            Name = "Neues Produkt",
+            Price = 2.5,
+            Quantity = 3
+        };
+
+        var createdItem = db.Items.Add(newItem);
+        db.SaveChanges();
+
+        Items.Add(createdItem.Entity);
+    }
+    
+    [RelayCommand]
+    private void OpenEditForm()
+    {
+        if (SelectedItem != null)
+        {
+            NavigationService.NavigateTo<CreateAndEdit>(new ItemFormViewModel(SelectedItem, () => NavigationService.NavigateTo<Overview>()));
+        }
     }
 
     private void OnItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -67,7 +94,6 @@ public sealed partial class StorageViewModel : ObservableObject
         }
 
         UpdatePriceAndCount();
-        UpdateFile();
     }
 
     private void OnItemPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -76,7 +102,5 @@ public sealed partial class StorageViewModel : ObservableObject
         {
             UpdatePriceAndCount();
         }
-        
-        UpdateFile();
     }
 }

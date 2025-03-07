@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using DefaultWPFBlueprint.Models;
 
-namespace DefaultWPFBlueprint;
+namespace DefaultWPFBlueprint.Persistence;
 
 public class JsonDataTemplate
 {

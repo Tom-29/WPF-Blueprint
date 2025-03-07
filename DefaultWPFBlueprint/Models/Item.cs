@@ -4,9 +4,11 @@ namespace DefaultWPFBlueprint.Models;
 
 public sealed partial class Item : ObservableObject
 {
-    [ObservableProperty] private string name;
+    [ObservableProperty] private long _id;
 
-    [ObservableProperty] private double price;
+    [ObservableProperty] private string _name;
 
-    [ObservableProperty] private long quantity;
+    [ObservableProperty] private double _price;
+
+    [ObservableProperty] private long _quantity;
 }
