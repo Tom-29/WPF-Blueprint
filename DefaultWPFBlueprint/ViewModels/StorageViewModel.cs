@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DefaultWPFBlueprint.Models;
@@ -49,21 +50,21 @@ public sealed partial class StorageViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void AddItem()
+    private void DeleteItem()
     {
-        using AppDbContext db = new AppDbContext();
-    
-        var newItem = new Item
+        if (SelectedItem != null)
         {
-            Name = "Neues Produkt",
-            Price = 2.5,
-            Quantity = 3
-        };
+            MessageBoxResult result = MessageBox.Show("Möchten Sie dieses Item wirklich löschen?", "Löschen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-        var createdItem = db.Items.Add(newItem);
-        db.SaveChanges();
+            if (result == MessageBoxResult.Yes)
+            {
+                using AppDbContext db = new();
+                db.Items.Remove(SelectedItem);
+                db.SaveChanges();
 
-        Items.Add(createdItem.Entity);
+                Items.Remove(SelectedItem);
+            }
+        }
     }
     
     [RelayCommand]
