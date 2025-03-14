@@ -13,4 +13,11 @@ public class AppDbContext : DbContext
     {
         optionsBuilder.UseSqlite("Data Source=data.db");
     }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.Username)
+            .IsUnique();
+    }
 }
